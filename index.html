@@ -1,0 +1,1574 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓝月亮洗衣液 · 开学季</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Design Tokens: Playful Geometric ===== */
+:root {
+  --background:      #FFFDF5;
+  --foreground:      #1E293B;
+  --muted:           #F1F5F9;
+  --mutedForeground: #64748B;
+  --accent:          #8B5CF6;
+  --accentForeground:#FFFFFF;
+  --secondary:       #F472B6;
+  --tertiary:        #FBBF24;
+  --quaternary:      #34D399;
+  --border:          #E2E8F0;
+  --input:           #FFFFFF;
+  --card:            #FFFFFF;
+  --ring:            #8B5CF6;
+
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-full:9999px;
+
+  --border-width: 2px;
+
+  /* Shadows: Pop Hard Shadow */
+  --shadow-pop:      4px 4px 0px 0px #1E293B;
+  --shadow-pop-hover:6px 6px 0px 0px #1E293B;
+  --shadow-pop-active:2px 2px 0px 0px #1E293B;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Utilities ===== */
+.container {
+  max-width: 72rem; /* max-w-6xl */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+.px-6  { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+.text-center { text-align: center; }
+
+/* ===== Blob shapes ===== */
+.blob-mask {
+  clip-path: circle(50% at 50% 50%);
+}
+
+.speech-bubble {
+  border-radius: var(--radius-2xl) var(--radius-2xl) var(--radius-2xl) 0;
+}
+
+/* ===== Confetti background shapes ===== */
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.confetti-shape {
+  position: absolute;
+  opacity: 0.12;
+}
+
+.confetti-triangle {
+  width: 0; height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 35px solid var(--tertiary);
+}
+
+.confetti-circle {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--secondary);
+}
+
+.confetti-dot-grid {
+  width: 120px; height: 120px;
+  background-image: radial-gradient(circle, var(--accent) 2px, transparent 2px);
+  background-size: 12px 12px;
+}
+
+/* ===== Section dividers: squiggles ===== */
+.squiggle-divider {
+  width: 100%;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.squiggle-divider svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: var(--accentForeground);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-full);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: var(--shadow-pop);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateX(-2px) translateY(-2px);
+  box-shadow: var(--shadow-pop-hover);
+}
+
+.btn-primary:active {
+  transform: translateX(2px) translateY(2px);
+  box-shadow: var(--shadow-pop-active);
+}
+
+.btn-primary .icon-circle {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: var(--foreground);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-full);
+  border: var(--border-width) solid var(--foreground);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: var(--tertiary);
+  transform: translateY(-2px);
+}
+
+/* ===== Sticker Card ===== */
+.sticker-card {
+  background: var(--card);
+  border: var(--border-width) solid var(--foreground);
+  border-radius: var(--radius-xl);
+  box-shadow: 8px 8px 0px 0px var(--border), 4px 4px 0px 0px var(--secondary);
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.sticker-card:hover {
+  transform: rotate(-1deg) scale(1.02);
+  box-shadow: 10px 10px 0px 0px var(--border), 6px 6px 0px 0px var(--secondary);
+}
+
+.sticker-card .floating-icon {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
+  z-index: 2;
+}
+
+.sticker-card.featured {
+  box-shadow: 8px 8px 0px 0px var(--border), 4px 4px 0px 0px var(--tertiary);
+}
+
+.sticker-card.featured:hover {
+  box-shadow: 10px 10px 0px 0px var(--border), 6px 6px 0px 0px var(--tertiary);
+}
+
+/* ===== Hero section ===== */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-decoration-circle {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36rem;
+  height: 36rem;
+  border-radius: 50%;
+  background: var(--tertiary);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  z-index: 0;
+}
+
+.hero-product-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.float-shape {
+  position: absolute;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.float-circle-1 {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  top: -5rem;
+  right: 25rem;
+}
+
+.float-circle-2 {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: var(--secondary);
+  bottom: 15%;
+  right: 38rem;
+}
+
+.float-diamond {
+  width: 6rem;
+  height: 6rem;
+  background: var(--quaternary);
+  bottom: 20%;
+  right: 28rem;
+  transform: rotate(45deg);
+  border-radius: var(--radius-sm);
+}
+
+.hero-dotted-pattern {
+  position: absolute;
+  right: 10rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  background-image: radial-gradient(circle, var(--foreground) 2px, transparent 2px);
+  background-size: 20px 20px;
+  opacity: 0.08;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 48rem;
+  margin: 0 auto;
+  margin-left: -8rem;
+  padding-left: 0;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--secondary);
+  color: white;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
+  margin-bottom: 1.5rem;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: bannerSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+  font-family: "STXingkai", "KaiTi", "楷体", "楷体_GB2312", serif;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-align: center;
+  position: relative;
+}
+
+.hero-title-line {
+  display: block;
+  position: relative;
+}
+
+.hero-title-line-main {
+  display: block;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 30%, #06B6D4 60%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 3px 0 rgba(0,0,0,0.08)) drop-shadow(0 6px 12px rgba(30, 64, 175, 0.15));
+  animation: glowPulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+.hero-title-line-sub {
+  display: block;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  background: linear-gradient(90deg, #7C3AED 0%, #EC4899 50%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.06)) drop-shadow(0 4px 8px rgba(124, 58, 237, 0.12));
+  margin-top: 0.3em;
+}
+
+/* Decorative sparkle dots */
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.sparkle::before, .sparkle::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.sparkle::before {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.sparkle::after {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.sparkle-1 { top: -10%; left: 12%; color: #FBBF24; animation: sparkleFloat 2s ease-in-out infinite; }
+.sparkle-2 { top: 5%; right: 10%; color: #34D399; animation: sparkleFloat 2.5s ease-in-out 0.3s infinite; }
+.sparkle-3 { bottom: -5%; left: 25%; color: #F472B6; animation: sparkleFloat 1.8s ease-in-out 0.6s infinite; }
+.sparkle-4 { bottom: 0; right: 20%; color: #60A5FA; animation: sparkleFloat 2.2s ease-in-out 0.9s infinite; }
+
+/* Background accent bar behind title */
+.title-accent-bar {
+  display: block;
+  width: 110%;
+  height: 6px;
+  margin: 0.6em auto 0;
+  background: linear-gradient(90deg, transparent, #3B82F6, #06B6D4, #FBBF24, #F472B6, transparent);
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+.hero-title .highlight {
+  position: relative;
+  display: inline-block;
+  background: var(--tertiary);
+  padding: 0 0.5rem;
+  border: var(--border-width) solid var(--foreground);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0px 0px var(--foreground);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--mutedForeground);
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+/* ===== Features grid ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* ===== Pricing / 开学套餐 ===== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pricing-card {
+  position: relative;
+}
+
+.pricing-card.popular {
+  transform: scale(1.05);
+  border-color: var(--accent);
+}
+
+.pricing-card.popular:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tertiary);
+  color: var(--foreground);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.375rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
+  white-space: nowrap;
+}
+
+.price-tag {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin: 1rem 0;
+}
+
+.price-tag .currency {
+  font-size: 1.5rem;
+  vertical-align: super;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+  color: var(--mutedForeground);
+}
+
+.feature-list li .check {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--quaternary);
+  border: var(--border-width) solid var(--foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  box-shadow: 1px 1px 0px 0px var(--foreground);
+}
+
+/* ===== Marquee ===== */
+.marquee-section {
+  overflow: hidden;
+  padding: 2rem 0;
+  border-top: var(--border-width) solid var(--foreground);
+  border-bottom: var(--border-width) solid var(--foreground);
+  background: var(--muted);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--foreground);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.marquee-item .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--secondary);
+  border: 2px solid var(--foreground);
+}
+
+/* ===== Footer ===== */
+.footer-section {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 4rem 0 2rem;
+}
+
+.footer-section h3 {
+  color: var(--tertiary);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--tertiary);
+}
+
+/* ===== Pop-in animation ===== */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Wiggle animation ===== */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+.wiggle-hover:hover {
+  animation: wiggle 0.4s ease-in-out;
+}
+
+/* ===== Marquee ===== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .features-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-decoration-circle {
+    width: 20rem;
+    height: 20rem;
+    right: 10rem;
+  }
+
+  .hero-product-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.float-shape {
+  position: absolute;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.float-circle-1 {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  top: -5rem;
+  right: 25rem;
+}
+
+.float-circle-2 {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: var(--secondary);
+  bottom: 15%;
+  right: 38rem;
+}
+
+.float-diamond {
+  width: 6rem;
+  height: 6rem;
+  background: var(--quaternary);
+  bottom: 20%;
+  right: 28rem;
+  transform: rotate(45deg);
+  border-radius: var(--radius-sm);
+}
+
+.hero-dotted-pattern {
+    width: 16rem;
+    height: 16rem;
+    right: 0;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .pricing-card.popular {
+    transform: scale(1);
+  }
+
+  .pricing-card.popular:hover {
+    transform: rotate(-1deg);
+  }
+
+  .py-24 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+/* ===== Focus states ===== */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+  box-shadow: 3px 3px 0px 0px var(--ring);
+}
+
+/* ===== Nav bar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--background);
+  border-bottom: var(--border-width) solid var(--foreground);
+  padding: 1rem 0;
+  box-shadow: 0 4px 0px 0px var(--border);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-brand .logo-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.navbar-links a {
+  color: var(--mutedForeground);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .navbar-links { display: none; }
+}
+
+/* ===== Section heading ===== */
+.section-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+.section-subheading {
+  font-size: 1.125rem;
+  color: var(--mutedForeground);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ===== Product showcase ===== */
+.product-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.product-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image-placeholder {
+  width: 100%;
+  max-width: 24rem;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  border: var(--border-width) solid var(--foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px);
+  background-size: 16px 16px;
+}
+
+.product-image-placeholder .product-emoji {
+  position: relative;
+  z-index: 1;
+}
+
+.product-info h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.product-info p {
+  color: var(--mutedForeground);
+  margin-bottom: 1.5rem;
+  font-size: 1.0625rem;
+}
+
+.product-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.product-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-highlights li .hl-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--quaternary);
+  border: var(--border-width) solid var(--foreground);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .product-showcase {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ===== Testimonial / quote ===== */
+.quote-card {
+  background: var(--tertiary);
+  border: var(--border-width) solid var(--foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  padding: 2.5rem;
+  margin: 2rem auto;
+  max-width: 48rem;
+  position: relative;
+}
+
+.quote-card::before {
+  content: '"';
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--foreground);
+  opacity: 0.15;
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  line-height: 1;
+}
+
+.quote-text {
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  color: var(--mutedForeground);
+  font-weight: 600;
+}
+
+/* Reviews grid */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: var(--tertiary);
+  border: var(--border-width) solid var(--foreground);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  padding: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.review-card:nth-child(2) {
+  background: #FDE68A;
+}
+
+.review-card:nth-child(3) {
+  background: #FBCFE8;
+}
+
+.review-card:nth-child(4) {
+  background: #BBF7D0;
+}
+
+.review-card:nth-child(5) {
+  background: #BFDBFE;
+}
+
+.review-card:nth-child(6) {
+  background: #DDD6FE;
+}
+
+.review-card:hover {
+  transform: rotate(-1deg) scale(1.03);
+  box-shadow: 6px 6px 0px 0px var(--foreground);
+}
+
+.review-card .quote-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.review-card .quote-author {
+  font-size: 0.8rem;
+  font-style: normal;
+}
+
+/* Star rating */
+.review-stars {
+  color: #F59E0B;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+
+/* ===== Hero product stage ===== */
+.hero-product-stage {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32rem;
+  height: 32rem;
+  z-index: 0;
+}
+
+.hero-stage-circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(52,211,153,0.12), rgba(139,92,246,0.08));
+  border: 2px solid var(--foreground);
+  box-shadow: 8px 8px 0px var(--foreground);
+}
+
+.hero-stage-inner {
+  position: absolute;
+  inset: 1.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,253,245,0.95), var(--background));
+  border: 2px solid var(--border);
+}
+
+.hero-product-stage img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 75%;
+  max-width: 22rem;
+  filter: drop-shadow(6px 8px 0px rgba(30,41,59,0.15));
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  z-index: 2;
+}
+
+.hero-product-stage:hover img {
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* ===== Floating feature tags ===== */
+.float-tag {
+  position: absolute;
+  background: var(--card);
+  border: 2px solid var(--foreground);
+  border-radius: var(--radius-full);
+  padding: 0.375rem 0.875rem;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0px 0px var(--border);
+  z-index: 3;
+  animation: floatTag 3s ease-in-out infinite;
+}
+
+.float-tag .tag-icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.float-tag--1 {
+  top: 8%;
+  right: -2rem;
+  color: var(--accent);
+  animation-delay: 0s;
+}
+
+.float-tag--2 {
+  bottom: 18%;
+  right: -3rem;
+  color: var(--secondary);
+  animation-delay: 1s;
+}
+
+.float-tag--3 {
+  bottom: 5%;
+  left: 0;
+  color: var(--quaternary);
+  animation-delay: 2s;
+}
+
+@keyframes floatTag {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: var(--glow-shadow); }
+  50% { text-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.3), 0 0 60px rgba(59, 130, 246, 0.1); }
+}
+
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-8px) rotate(180deg) scale(1.2); opacity: 1; }
+}
+
+@keyframes bannerSlide {
+  0% { transform: translateY(-30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ===== Responsive: hide stage decoration on mobile ===== */
+@media (max-width: 768px) {
+  .hero-product-stage {
+    display: none;
+  }
+  .hero-content {
+    margin-left: 0;
+    text-align: center;
+  }
+  .hero-title-line-main {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+  .hero-title-line-sub {
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+  }
+  .sparkle { display: none; }
+  .title-accent-bar { width: 130%; }
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-section {
+    min-height: auto;
+    padding: 8rem 0 4rem;
+  }
+}</style>
+</head>
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar" role="navigation" aria-label="主导航">
+  <div class="container">
+    <a href="#" class="navbar-brand">
+      <span class="logo-circle">🌙</span>
+      蓝月亮
+    </a>
+    <ul class="navbar-links">
+      <li><a href="#features">核心卖点</a></li>
+      <li><a href="#products">产品</a></li>
+      <li><a href="#packages">开学套餐</a></li>
+      <li><a href="#reviews">口碑</a></li>
+    </ul>
+    <a href="#packages" class="btn-primary" style="padding:0.625rem 1.5rem; font-size:0.875rem;">
+      立即抢购
+    </a>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero-section" aria-label="开学季主视觉">
+  <!-- Product showcase area -->
+  <div class="hero-product-showcase" aria-hidden="true">
+    <!-- Decorative floating shapes -->
+    <div class="float-shape float-circle-1" aria-hidden="true"></div>
+    <div class="float-shape float-circle-2" aria-hidden="true"></div>
+    <div class="float-shape float-diamond" aria-hidden="true"></div>
+  </div>
+
+  <!-- Hero product stage with floating tags -->
+  <div class="hero-product-stage" aria-hidden="true">
+    <div class="hero-stage-circle"></div>
+    <div class="hero-stage-inner"></div>
+    <img src="E:/zhaopian/Screenshots/蓝月亮_去底_2.png" alt="蓝月亮洗衣液" />
+    <div class="float-tag float-tag--1"><span class="tag-icon">👕</span>校服专用</div>
+    <div class="float-tag float-tag--2"><span class="tag-icon">🌿</span>深层洁净</div>
+    <div class="float-tag float-tag--3"><span class="tag-icon">✨</span>持久留香</div>
+  </div>
+  <div class="hero-dotted-pattern" aria-hidden="true"></div>
+  <div class="confetti-container" aria-hidden="true">
+    <div class="confetti-shape confetti-triangle" style="top:10%;left:5%;transform:rotate(15deg);"></div>
+    <div class="confetti-shape confetti-circle" style="top:20%;right:15%;"></div>
+    <div class="confetti-shape confetti-dot-grid" style="bottom:15%;left:10%;"></div>
+    <div class="confetti-shape confetti-triangle" style="top:60%;right:35%;transform:rotate(-20deg);border-bottom-color:var(--secondary);"></div>
+    <div class="confetti-shape confetti-circle" style="bottom:25%;right:8%;background:var(--quaternary);"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">📚 2026 开学季限定</div>
+      <h1 class="hero-title hero-title-calligraphy">
+        <span class="sparkle sparkle-1"></span>
+        <span class="sparkle sparkle-2"></span>
+        <span class="sparkle sparkle-3"></span>
+        <span class="sparkle sparkle-4"></span>
+        <span class="hero-title-line">
+          <span class="hero-title-line-main">开学换新季</span>
+        </span>
+        <span class="hero-title-line">
+          <span class="hero-title-line-sub">洁净更安心</span>
+        </span>
+        <span class="title-accent-bar"></span>
+      </h1>
+      <p class="hero-subtitle">
+        蓝月亮月亮熊系列洗衣液，深层洁净、持久留香，让每一件校服都焕然一新。开学季限量套装，为新生准备一份贴心的礼物。
+      </p>
+      <div class="hero-actions">
+        <a href="#packages" class="btn-primary">
+          看看套餐
+          <span class="icon-circle">→</span>
+        </a>
+        <a href="#features" class="btn-secondary">了解更多</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Marquee ===== -->
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="dot"></span>深层洁净</span>
+    <span class="marquee-item"><span class="dot"></span>持久留香</span>
+    <span class="marquee-item"><span class="dot"></span>护色护衣</span>
+    <span class="marquee-item"><span class="dot"></span>低泡易漂</span>
+    <span class="marquee-item"><span class="dot"></span>温和不伤手</span>
+    <span class="marquee-item"><span class="dot"></span>除菌除螨</span>
+    <span class="marquee-item"><span class="dot"></span>深层洁净</span>
+    <span class="marquee-item"><span class="dot"></span>持久留香</span>
+    <span class="marquee-item"><span class="dot"></span>护色护衣</span>
+    <span class="marquee-item"><span class="dot"></span>低泡易漂</span>
+    <span class="marquee-item"><span class="dot"></span>温和不伤手</span>
+    <span class="marquee-item"><span class="dot"></span>除菌除螨</span>
+  </div>
+</div>
+
+<!-- ===== Features ===== -->
+<section id="features" class="py-24" aria-labelledby="features-heading">
+  <div class="container">
+    <div class="text-center">
+      <h2 id="features-heading" class="section-heading">为什么选蓝月亮？</h2>
+      <p class="section-subheading">六大核心卖点，每一样都为了你的衣物着想</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Card 1: 深层洁净 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:var(--accent);color:white;">✨</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">深层洁净</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          先进活性萃取技术，深入纤维内部，强力去除污渍，顽固油渍汗渍也能轻松应对。
+        </p>
+      </div>
+
+      <!-- Card 2: 持久留香 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:var(--secondary);color:white;">🌸</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">持久留香</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          微胶囊锁香科技，洗后留香长达72小时，从教室到操场，清新陪伴每一天。
+        </p>
+      </div>
+
+      <!-- Card 3: 护色护衣 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:var(--tertiary);color:var(--foreground);">🎨</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">护色护衣</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          防止衣物褪色发灰，保持校服色彩鲜艳如新，一件能穿整整一个学年。
+        </p>
+      </div>
+
+      <!-- Card 4: 低泡易漂 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:var(--quaternary);color:white;">💧</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">低泡易漂</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          低泡配方，手洗机洗都适用，快速漂洗不残留，节水又省力。
+        </p>
+      </div>
+
+      <!-- Card 5: 温和不伤手 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:#F97316;color:white;">🤲</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">温和不伤手</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          中性配方，通过皮肤刺激性测试，手洗护手，温柔呵护每一寸肌肤。
+        </p>
+      </div>
+
+      <!-- Card 6: 除菌除螨 -->
+      <div class="sticker-card">
+        <div class="floating-icon wiggle-hover" style="background:#EF4444;color:white;">🛡️</div>
+        <h3 style="margin-top:1rem;font-size:1.375rem;">除菌除螨</h3>
+        <p style="color:var(--mutedForeground);margin-top:0.75rem;">
+          99.9%除菌率，有效去除螨虫，守护你和家人的衣物卫生健康。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Squiggle Divider ===== -->
+<div class="squiggle-divider" aria-hidden="true">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,20 Q150,0 300,20 T600,20 T900,20 T1200,20" fill="none" stroke="#1E293B" stroke-width="2"/>
+  </svg>
+</div>
+
+<!-- ===== Products ===== -->
+<section id="products" class="py-24" style="background:var(--muted);" aria-labelledby="products-heading">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem;">
+      <h2 id="products-heading" class="section-heading">开学季明星产品</h2>
+      <p class="section-subheading">为新学期精心挑选，总有一款适合你</p>
+    </div>
+
+    <div class="product-showcase">
+      <div class="product-image-wrapper">
+        <img src="E:/zhaopian/Screenshots/熊寶貝_去底.png" alt="熊寶貝衣物香氛袋 薰衣草" style="
+          width:100%;
+          max-width:24rem;
+          aspect-ratio:3/4;
+          object-fit:contain;
+          border:var(--border-width) solid var(--foreground);
+          border-radius:var(--radius-lg);
+          box-shadow:var(--shadow-pop);
+          display:block;
+          position:relative;
+        " />
+        <!-- Decorative blob -->
+        <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--tertiary);border:2px solid var(--foreground);box-shadow:3px 3px 0px 0px var(--foreground);z-index:-1;" aria-hidden="true"></div>
+      </div>
+      <div class="product-info">
+        <h2>月亮熊 · 薰衣草香氛</h2>
+        <p>
+          与迪士尼联名的月亮熊限定款，柔软薰衣草香，是梦的味道。3kg 大容量装，够用一个学期。
+        </p>
+        <ul class="product-highlights">
+          <li>
+            <span class="hl-icon">🌾</span>
+            <span>天然薰衣草精油，助眠舒缓</span>
+          </li>
+          <li>
+            <span class="hl-icon">🐻</span>
+            <span>月亮熊限定包装，可爱收藏</span>
+          </li>
+          <li>
+            <span class="hl-icon">📏</span>
+            <span>3kg 大容量，约可使用 90 天</span>
+          </li>
+          <li>
+            <span class="hl-icon">♻️</span>
+            <span>泵头设计，用量精准不浪费</span>
+          </li>
+        </ul>
+        <a href="#packages" class="btn-primary">
+          加入套餐
+          <span class="icon-circle">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section aria-labelledby="quote-heading" style="padding:4rem 0;">
+  <div class="container">
+    <h2 class="section-heading" style="text-align:center;margin-bottom:2rem;">新生都在用</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">自从用了蓝月亮月亮熊，宿舍的脏衣服都变得可爱起来了！薰衣草味道超好闻，舍友都来问链接。</p>
+        <p class="quote-author">— 小陈，2025级新生 · 河源技师学院</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">宿舍楼下的洗衣机总是洗不干净校服，换了蓝月亮之后终于没有异味了，月亮熊的香味绝了！</p>
+        <p class="quote-author">— 林同学，2024级 · 河源技师学院</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">开学第一件大事就是给爸妈囤洗衣液，蓝月亮这包装太讨喜了，月亮熊摆在柜子上就想摸。</p>
+        <p class="quote-author">— 王同学，2025级 · 河源技师学院</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">之前用普通洗衣液洗完校服总觉得涩涩的，蓝月亮这个洗完又软又香，军训服也能洗干净。</p>
+        <p class="quote-author">— 张同学，2025级新生 · 河源技师学院</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">宿舍六个人全被安利了蓝月亮月亮熊，现在全楼都在用，团购买更划算。</p>
+        <p class="quote-author">— 李同学，2023级 · 河源技师学院</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★★★★★</p>
+        <p class="quote-text">包装超萌而且浓缩配方，一瓶能用好久！味道是那种高级的淡香，不会刺鼻。</p>
+        <p class="quote-author">— 陈同学，2024级 · 河源技师学院</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Squiggle Divider ===== -->
+<div class="squiggle-divider" aria-hidden="true">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path d="M0,20 Q150,40 300,20 T600,20 T900,20 T1200,20" fill="none" stroke="#1E293B" stroke-width="2"/>
+  </svg>
+</div>
+
+<!-- ===== Pricing Packages ===== -->
+<section id="packages" class="py-24" aria-labelledby="packages-heading">
+  <div class="container">
+    <div class="text-center">
+      <h2 id="packages-heading" class="section-heading">开学季限定套餐</h2>
+      <p class="section-subheading">选对套餐，洗护无忧一整季</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter: 单人宿舍 -->
+      <div class="sticker-card pricing-card">
+        <h3 style="font-size:1.25rem;">单人宿舍装</h3>
+        <p style="color:var(--mutedForeground);font-size:0.875rem;">适合1人使用</p>
+        <div class="price-tag"><span class="currency">¥</span>39.9</div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span>月亮熊洗衣液 1kg × 1</li>
+          <li><span class="check">✓</span>便携旅行装 200ml × 1</li>
+          <li><span class="check">✓</span>月亮熊贴纸套装</li>
+          <li><span class="check">✓</span>免运费</li>
+        </ul>
+        <a href="#" class="btn-secondary" style="width:100%;justify-content:center;">选择此套餐</a>
+      </div>
+
+      <!-- Popular: 推荐套餐 -->
+      <div class="sticker-card pricing-card popular featured">
+        <span class="popular-badge">⭐ 最受欢迎</span>
+        <h3 style="font-size:1.25rem;">双人共享装</h3>
+        <p style="color:var(--mutedForeground);font-size:0.875rem;">适合1-2人使用</p>
+        <div class="price-tag"><span class="currency">¥</span>69.9</div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span>月亮熊洗衣液 3kg × 1</li>
+          <li><span class="check">✓</span>便携旅行装 200ml × 2</li>
+          <li><span class="check">✓</span>月亮熊徽章 + 贴纸套装</li>
+          <li><span class="check">✓</span>免运费</li>
+          <li><span class="check">✓</span>送洗衣袋 × 3</li>
+        </ul>
+        <a href="#" class="btn-primary" style="width:100%;justify-content:center;">
+          选择此套餐
+          <span class="icon-circle">→</span>
+        </a>
+      </div>
+
+      <!-- Family: 宿舍拼团 -->
+      <div class="sticker-card pricing-card">
+        <h3 style="font-size:1.25rem;">宿舍拼团装</h3>
+        <p style="color:var(--mutedForeground);font-size:0.875rem;">适合3-4人拼团</p>
+        <div class="price-tag"><span class="currency">¥</span>119.9</div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span>月亮熊洗衣液 3kg × 3</li>
+          <li><span class="check">✓</span>便携旅行装 200ml × 4</li>
+          <li><span class="check">✓</span>月亮熊玩偶（迷你版）</li>
+          <li><span class="check">✓</span>免运费</li>
+          <li><span class="check">✓</span>送洗衣袋 × 6 + 香珠一盒</li>
+        </ul>
+        <a href="#" class="btn-secondary" style="width:100%;justify-content:center;">选择此套餐</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="py-24" style="background:var(--muted);" aria-labelledby="faq-heading">
+  <div class="container" style="max-width:48rem;">
+    <div class="text-center">
+      <h2 id="faq-heading" class="section-heading">常见问题</h2>
+    </div>
+    <div style="margin-top:2rem;">
+      <div style="background:var(--card);border:2px solid var(--foreground);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;box-shadow:3px 3px 0px 0px var(--border);">
+        <h4 style="font-size:1.125rem;margin-bottom:0.5rem;">📦 发货时间是？</h4>
+        <p style="color:var(--mutedForeground);">开学季订单将在下单后 48 小时内发出，预计 3-5 天送达。</p>
+      </div>
+      <div style="background:var(--card);border:2px solid var(--foreground);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;box-shadow:3px 3px 0px 0px var(--border);">
+        <h4 style="font-size:1.125rem;margin-bottom:0.5rem;">🎁 包装是限定的吗？</h4>
+        <p style="color:var(--mutedForeground);">是的！开学季套餐采用月亮熊限定包装，每件产品都有独特设计。</p>
+      </div>
+      <div style="background:var(--card);border:2px solid var(--foreground);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;box-shadow:3px 3px 0px 0px var(--border);">
+        <h4 style="font-size:1.125rem;margin-bottom:0.5rem;">🔄 可以退货吗？</h4>
+        <p style="color:var(--mutedForeground);">支持 7 天无理由退货（未开封），收到商品后联系客服即可。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer-section" role="contentinfo">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:3rem;">
+      <div>
+        <h3 style="font-size:1.5rem;margin-bottom:0.5rem;">蓝月亮</h3>
+        <p style="color:var(--muted);font-size:0.9375rem;">专业洗衣护理，陪伴每一天。</p>
+      </div>
+      <div>
+        <h4 style="font-size:1rem;margin-bottom:0.75rem;color:var(--muted);">产品</h4>
+        <div class="footer-links" style="flex-direction:column;gap:0.5rem;">
+          <a href="#">月亮熊系列</a>
+          <a href="#">至尊系列</a>
+          <a href="#">手洗专用</a>
+          <a href="#">内衣洗衣液</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:1rem;margin-bottom:0.75rem;color:var(--muted);">支持</h4>
+        <div class="footer-links" style="flex-direction:column;gap:0.5rem;">
+          <a href="#">帮助中心</a>
+          <a href="#">联系客服</a>
+          <a href="#">售后政策</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:1rem;margin-bottom:0.75rem;color:var(--muted);">关注我们</h4>
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--accent);border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;" aria-label="微信">微</span>
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--secondary);border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;" aria-label="微博">博</span>
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--quaternary);border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;" aria-label="小红书">红</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:3rem;padding-top:1.5rem;text-align:center;color:var(--muted);font-size:0.875rem;">
+      © 2026 蓝月亮 · 开学季活动页 · 仅供演示
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
